@@ -12,9 +12,32 @@ ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
 */
-
+#include<stddef.h>
 #include <stdio.h>
-
+#include<stddef.h>
 void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCount) {
-	return NULL;
+	int index = 0;
+	*lessCount = 0, *moreCount = 0;
+	if (len < 0 || Arr == NULL)
+		return NULL;
+	if (len == 1)
+	{
+		if (Arr[index]<score)
+			(*lessCount) = 1;
+		else if (Arr[index]>score)
+			(*moreCount) = 1;
+		
+	}
+	if (len>1)
+	{
+		while (index<len)
+		{
+			if (Arr[index]<score)
+				(*lessCount)++;
+			if (Arr[index]>score)
+				(*moreCount)++;
+			index++;
+		}
+	}
+
 }
