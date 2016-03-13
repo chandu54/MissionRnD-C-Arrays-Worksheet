@@ -12,15 +12,40 @@ ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
 */
-
 #include <iostream>
 #include <malloc.h>
-
+#include<stddef.h>
 struct student {
 	char *name;
 	int score;
 };
-
-struct student ** topKStudents(struct student *students, int len, int K) {
-	return NULL;
+struct student ** topKStudents(struct student *students, int len, int K) 
+{
+	struct student** topk;
+	int index1, index2, temp;
+	if (len == 0 || K <=0)
+		return NULL;
+	else
+	{
+		if (K > len)
+			K = len;
+		for (index1 = 0; index1 < K; index1++)
+		{
+			for (index2 = index1 + 1; index2 < len; index2++)
+			{
+				if (students[index1].score < students[index2].score)
+				{
+					temp = students[index1].score;
+					students[index1].score = students[index2].score;
+					students[index2].score = temp;
+				}
+			}
+		}
+		topk = (student**)malloc(K*sizeof(student));
+		for (index1 = 0; index1 < K; index1++)
+			topk[index1] = &students[index1];
+	}
+	return topk;
 }
+
+
